@@ -1,3 +1,18 @@
+
+/* tradutor de pontos para joins */
+function ponto2join(ponto,rede)
+{
+	if(ponto=="69" && rede=="01")
+	return "666";
+	else if(ponto=="61" && rede=="01")
+	return "667";
+	else return "1"; // à prova de falhas \m/
+}
+
+
+
+
+
 /* trata o volume do Denon */
 
 
@@ -34,39 +49,25 @@ powerState["LocalBus02"]=[];
 
 function toggleMyHome(ponto,rede) {
 	//CF.send("MyHomeMonitor", "*#1*"+ponto+"#4#"+rede+"##\x0D"); //pega o estado inicial
-	CF.log("===>>>> powerState: "+powerState["LocalBus"+rede]['Ponto'+ponto]+" ponto: "+ponto+" rede: "+rede);
+	CF.log("===>>>> powerState: "+powerState[(!rede?"PrivateRaiser":"LocalBus"+rede)]['Ponto'+ponto]+" ponto: "+ponto+" rede: "+rede);
 	//alert(powerState);
-    if (powerState["LocalBus"+rede]['Ponto'+ponto] == 1) {
+    if (powerState[(!rede?"PrivateRaiser":"LocalBus"+rede)]['Ponto'+ponto] == 1) {
         // Turn power off
-        CF.send("__MyHome", "*1*0*"+ponto+"#4#"+rede+"##\x0D");
+        CF.send("__MyHome", "*1*0*"+ponto+(!rede?"":"#4#"+rede)+"##\x0D");
 
     } else {
         // Turn power on
-        CF.send("__MyHome", "*1*1*"+ponto+"#4#"+rede+"##\x0D");
+        CF.send("__MyHome", "*1*1*"+ponto+(!rede?"":"#4#"+rede)+"##\x0D");
 
     }
     // Request power state for next press
-    CF.send("MyHomeMonitor", "*#1*"+ponto+"#4#"+rede+"##\x0D"); //pega o estado inicial
+    CF.send("MyHomeMonitor", "*#1*"+ponto+(!rede?"":"#4#"+rede)+"##\x0D"); //pega o estado inicial
 
 
 }
 
 
 
-
-
-
-
-
-/* tradutor de pontos para joins */
-function ponto2join(ponto,rede)
-{
-	if(ponto=="69" && rede=="01")
-	return "666";
-	else if(ponto=="61" && rede=="01")
-	return "667";
-	else return "1"; // à prova de falhas \m/
-}
 
 
 
