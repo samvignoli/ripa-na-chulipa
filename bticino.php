@@ -1,4 +1,4 @@
-<?php
+<pre><?php
 // Bticino myhome PHP controller
 // Samuel Vignoli, 2012
 
